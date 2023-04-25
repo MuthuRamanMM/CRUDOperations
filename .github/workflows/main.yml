@@ -1,7 +1,7 @@
-name: Firstbuild  
+name: CRUD Build
 on:   
- push:   
-  branches:
+  push:   
+    branches:
       - main
 jobs: 
   push:
@@ -9,27 +9,30 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-    - uses: appleboy/ssh-action@master
+    - name: SSH into remote server
+      uses: appleboy/ssh-action@master
       with:
-       host: ${{ secrets.TEST_SERVER }}
-       username: ${{ secrets.TEST_USERNAME }}
-       key: ${{ secrets.TEST_KEY }}
-       port: ${{ secrets.TEST_PORT }}
-       script: |
-        cd /home/ubuntu/CRUDOPS
-        run: pwd
-        git pull origin main
-        git status
+        host: ${{ secrets.TEST_SERVER }}
+        username: ${{ secrets.TEST_USERNAME }}
+        key: ${{ secrets.TEST_KEY }}
+        port: ${{ secrets.TEST_PORT }}
+        script: |
+          cd /home/ubuntu/CRUDOPS
+          pwd
+          git pull origin main
+          git status
         
     - name: Checkout code
       uses: actions/checkout@v2
+      
     - name: Build and package WAR file
-      run:  mvn clean install
+      run: mvn clean install
+      
     - name: executing remote ssh commands using ssh key
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
-          SSH_PRIVATE_KEY: ${{ secrets.TEST_KEY }}
-          SOURCE: "target/*"
-          REMOTE_HOST: ${{ secrets.TEST_SERVER }}
-          REMOTE_USER: ${{ secrets.TEST_USERNAME }}
-          TARGET: "/home/ubuntu/CRUD/CRUDOperations/CRUDOperations"
+        SSH_PRIVATE_KEY: ${{ secrets.TEST_KEY }}
+        SOURCE: "target/*"
+        REMOTE_HOST: ${{ secrets.TEST_SERVER }}
+        REMOTE_USER: ${{ secrets.TEST_USERNAME }}
+        TARGET: "/home/ubuntu/CRUD/CRUDOperations/CRUDOperations"
