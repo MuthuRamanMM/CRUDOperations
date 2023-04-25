@@ -1,0 +1,34 @@
+name: Firstbuild  
+on:   
+ push:   
+  branches:
+      - main
+jobs: 
+  push:
+    name: push
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: appleboy/ssh-action@master
+      with:
+       host: ${{ secrets.TEST_SERVER }}
+       username: ${{ secrets.TEST_USERNAME }}
+       key: ${{ secrets.TEST_KEY }}
+       port: ${{ secrets.TEST_PORT }}
+       script: |
+        cd /home/ubuntu/CRUDOPS
+        git pull origin main
+        git status
+        
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Build and package WAR file
+      run:  mvn clean install
+    - name: executing remote ssh commands using ssh key
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+          SSH_PRIVATE_KEY: ${{ secrets.TEST_KEY }}
+          SOURCE: "target/*"
+          REMOTE_HOST: ${{ secrets.TEST_SERVER }}
+          REMOTE_USER: ${{ secrets.TEST_USERNAME }}
+          TARGET: "/home/ubuntu/CRUDOPS/CRUDOperations"
