@@ -35,4 +35,4 @@ jobs:
         SOURCE: "target/*"
         REMOTE_HOST: ${{ secrets.TEST_SERVER }}
         REMOTE_USER: ${{ secrets.TEST_USERNAME }}
-        TARGET: "/home/ubuntu/CRUD/CRUDOperations/CRUDOperations"
+        TARGET: "/home/ubuntu/CRUD/CRUDOperations/CRUDOperations/target"
