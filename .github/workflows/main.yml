@@ -1,4 +1,4 @@
-name: CRUD  
+name: CRUD OPS 
 on:   
  push:   
   branches:
