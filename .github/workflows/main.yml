@@ -17,6 +17,7 @@ jobs:
        port: ${{ secrets.TEST_PORT }}
        script: |
         cd /home/ubuntu/CRUDOPS
+        run: pwd
         git pull origin main
         git status
         
