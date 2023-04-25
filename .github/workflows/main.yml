@@ -17,7 +17,7 @@ jobs:
         key: ${{ secrets.TEST_KEY }}
         port: ${{ secrets.TEST_PORT }}
         script: |
-          cd /home/ubuntu/CRUDOPS
+          cd /home/ubuntu/CRUD/CRUDOperations
           pwd
           git pull origin main
           git status
