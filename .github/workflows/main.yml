@@ -28,5 +28,5 @@ jobs:
           username: ${{ secrets.TEST_USERNAME }}
           key: ${{ secrets.TEST_KEY }}
           port: ${{ secrets.TEST_PORT }}
-          source: "target/*.jar"
+          source: "/home/ubuntu/Test2/target/*.jar"
           target: "/home/ubuntu/Test2/app.jar"
