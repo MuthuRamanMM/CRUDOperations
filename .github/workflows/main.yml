@@ -15,12 +15,21 @@ jobs:
           java-version: 17
       - name: Build with Maven
         run: mvn -B clean package --file pom.xml
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: target/*.war
 
   deploy:
     # Job to deploy the Maven project to the Putty server
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: app
       - name: Copy files to Putty server
         uses: appleboy/scp-action@master
         with:
@@ -28,5 +37,5 @@ jobs:
           username: ${{ secrets.TEST_USERNAME }}
           key: ${{ secrets.TEST_KEY }}
           port: ${{ secrets.TEST_PORT }}
-          source: "/home/ubuntu/Test2/*.war"
+          source: "*.war"
           target: "/home/ubuntu/Test2/app.war"
