@@ -29,4 +29,4 @@ jobs:
           key: ${{ secrets.TEST_KEY }}
           port: ${{ secrets.TEST_PORT }}
           source: "target/*.jar"
-          target: "/home/ubuntu/app.jar"
+          target: "/home/ubuntu/Test2/app.jar"
