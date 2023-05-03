@@ -18,7 +18,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: app
+          name: CRUDOperations
           path: target/*.jar
 
   deploy:
@@ -29,7 +29,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: app
+          name: CRUDOperations
       - name: Copy files to Putty server
         uses: appleboy/scp-action@master
         with:
@@ -38,4 +38,4 @@ jobs:
           key: ${{ secrets.TEST_KEY }}
           port: ${{ secrets.TEST_PORT }}
           source: "*.jar"
-          target: "/home/ubuntu/Test2/app.jar"
+          target: "/home/ubuntu/Test2/CRUDOperations.jar"
