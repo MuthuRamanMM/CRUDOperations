@@ -19,7 +19,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app
-          path: target/*.war
+          path: target/*.jar
 
   deploy:
     # Job to deploy the Maven project to the Putty server
@@ -37,5 +37,5 @@ jobs:
           username: ${{ secrets.TEST_USERNAME }}
           key: ${{ secrets.TEST_KEY }}
           port: ${{ secrets.TEST_PORT }}
-          source: "*.war"
-          target: "/home/ubuntu/Test2/app.war"
+          source: "*.jar"
+          target: "/home/ubuntu/Test2/app.jar"
