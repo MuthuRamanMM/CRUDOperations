@@ -20,7 +20,7 @@ jobs:
         with:
           name: CRUDOperations
           path: target/*.jar
-
+          
   deploy:
     # Job to deploy the Maven project to the Putty server
     runs-on: ubuntu-latest
