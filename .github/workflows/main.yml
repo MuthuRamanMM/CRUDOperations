@@ -38,4 +38,4 @@ jobs:
           key: ${{ secrets.TEST_KEY }}
           port: ${{ secrets.TEST_PORT }}
           source: "*.jar"
-          target: "/home/ubuntu/Test2/CRUDOperations.jar"
+          target: "/home/ubuntu/target/CRUDOperations"
